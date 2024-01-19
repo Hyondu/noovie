@@ -4,6 +4,8 @@ import Poster from "./Poster";
 import Votes from "./Votes";
 import { useNavigation } from "@react-navigation/native";
 import { Pressable } from "react-native";
+import { TMovie } from "../screens/Movies";
+import { DetailScreenNavigationProp } from "../screens/Detail";
 
 const HMovie = styled.View`
   padding: 0px 30px;
@@ -41,18 +43,18 @@ interface HMediaProps {
   overview: string;
   releaseDate?: string;
   voteAverage?: number;
-  fullData: Object;
+  fullData: TMovie;
 }
 
-const HMedia: React.FC<HMediaProps> = ({
+const HMedia = ({
   posterPath,
   originalTitle,
   overview,
   releaseDate,
   voteAverage,
   fullData,
-}) => {
-  const nav = useNavigation();
+}: HMediaProps) => {
+  const nav = useNavigation<DetailScreenNavigationProp>();
   const goToDetail = () => nav.navigate("Stacks", { screen: "Detail", params: { ...fullData } });
   return (
     <Pressable onPress={goToDetail}>

@@ -9,7 +9,7 @@ import Slide from "../components/Slide";
 import { HList } from "../components/HList";
 import HMedia from "../components/HMedia";
 
-type TMovie = {
+export type TMovie = {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];

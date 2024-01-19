@@ -5,6 +5,8 @@ import { makeImgPath } from "../utils";
 import { BlurView } from "expo-blur";
 import Poster from "./Poster";
 import { useNavigation } from "@react-navigation/native";
+import { TMovie } from "../screens/Movies";
+import { DetailScreenNavigationProp } from "../screens/Detail";
 
 const BgImg = styled.Image``;
 
@@ -42,19 +44,19 @@ interface SlideProps {
   originalTitle: string;
   voteAverage: number;
   overview: string;
-  fullData: Object;
+  fullData: TMovie;
 }
 
-const Slide: React.FC<SlideProps> = ({
+const Slide = ({
   backdropPath,
   posterPath,
   originalTitle,
   voteAverage,
   overview,
   fullData,
-}) => {
+}: SlideProps) => {
   const isDark = useColorScheme() === "dark";
-  const nav = useNavigation();
+  const nav = useNavigation<DetailScreenNavigationProp>();
   const goToDetail = () => nav.navigate("Stacks", { screen: "Detail", params: { ...fullData } });
   return (
     <TouchableWithoutFeedback onPress={goToDetail}>

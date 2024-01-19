@@ -4,6 +4,8 @@ import Poster from "./Poster";
 import Votes from "./Votes";
 import { Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { TMovie } from "../screens/Movies";
+import { DetailScreenNavigationProp } from "../screens/Detail";
 
 const VMovie = styled.View`
   align-items: center;
@@ -20,11 +22,11 @@ interface VMediaProps {
   posterPath: string;
   originalTitle: string;
   voteAverage: number;
-  fullData: Object;
+  fullData: TMovie;
 }
 
-const VMedia: React.FC<VMediaProps> = ({ posterPath, originalTitle, voteAverage, fullData }) => {
-  const nav = useNavigation();
+const VMedia = ({ posterPath, originalTitle, voteAverage, fullData }: VMediaProps) => {
+  const nav = useNavigation<DetailScreenNavigationProp>();
   const goToDetail = () => nav.navigate("Stacks", { screen: "Detail", params: { ...fullData } });
   return (
     <Pressable onPress={goToDetail}>

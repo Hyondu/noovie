@@ -1,9 +1,14 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Stacks from "./Stacks";
+import Stacks, { StacksParamList } from "./Stacks";
 import Tabs from "./Tabs";
+import { NavigatorScreenParams } from "@react-navigation/native";
 
-const Nav = createNativeStackNavigator();
+export type RootParamList = {
+  Tabs: undefined;
+  Stacks: NavigatorScreenParams<StacksParamList>;
+};
+const Nav = createNativeStackNavigator<RootParamList>();
 
 const Root = () => {
   return (

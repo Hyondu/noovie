@@ -1,19 +1,20 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Detail from "../screens/Detail";
+import Detail, { TDetail } from "../screens/Detail";
 import { useColorScheme } from "react-native";
 import { BLACK_COLOR } from "../colors";
 
-const Stack = createNativeStackNavigator();
+export type StacksParamList = {
+  Detail: TDetail;
+};
+
+const Stack = createNativeStackNavigator<StacksParamList>();
 
 function Stacks() {
   const isDark = useColorScheme() === "dark";
   return (
     <Stack.Navigator
       screenOptions={{
-        tabBarStyle: {
-          backgroundColor: isDark ? BLACK_COLOR : "white",
-        },
         headerStyle: {
           backgroundColor: isDark ? BLACK_COLOR : "white",
         },

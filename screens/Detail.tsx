@@ -1,4 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
+import { CompositeNavigationProp, useNavigation } from "@react-navigation/native";
 import React, { useEffect } from "react";
 import { Dimensions, Platform, Share, StyleSheet, TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
@@ -11,6 +11,9 @@ import { moviesAPI, tvAPI } from "../fetchers";
 import { Loader } from "../components/Loader";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import * as WebBrowser from "expo-web-browser";
+import { NativeStackNavigationProp, NativeStackScreenProps } from "@react-navigation/native-stack";
+import { StacksParamList } from "../navigation/Stacks";
+import { RootParamList } from "../navigation/Root";
 
 type TVideo = {
   iso_639_1: string;
@@ -24,6 +27,22 @@ type TVideo = {
   published_at: string;
   id: string;
 };
+
+export type TDetail = {
+  id: number;
+  original_title?: string;
+  original_name?: string;
+  overview: string;
+  backdrop_path: string;
+  poster_path: string;
+};
+
+type DetailScreenProps = NativeStackScreenProps<StacksParamList, "Detail">;
+
+export type DetailScreenNavigationProp = CompositeNavigationProp<
+  NativeStackNavigationProp<StacksParamList, "Detail">,
+  NativeStackNavigationProp<RootParamList>
+>;
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
@@ -69,7 +88,7 @@ const BtnText = styled.Text`
   line-height: 24px;
 `;
 
-const Detail = ({ route: { params } }) => {
+const Detail = ({ route: { params } }: DetailScreenProps) => {
   // setup
   const nav = useNavigation();
   const isMovie = "original_title" in params;
